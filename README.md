@@ -1,27 +1,24 @@
 # router
 
-> **High-Throughput Geometric Substrate, Hypervector Lifecycle Router & Hybrid Code Search Engine**  
-> Syntra Labs systems core in pure C++20 with zero third-party dependencies.
+> **Fast C++20 Code Search Engine & Data Classification Core**  
+> Pure C++20 with zero third-party dependencies.
 
 ---
 
 ## 1. Overview
 
-`router` is a unified systems engine providing two complementary capabilities for developer environments, language agents, and code reasoning systems:
+`router` is a fast C++20 systems library providing two main capabilities:
 
-1. **`manifold` — Geometric Substrate & Lifecycle Router**:
-   - Zero-dependency, parser-free byte-entropy and 8192-bit binary hypervector engine.
-   - **SpiralCore $\text{Cl}(0,6)$ Clifford Algebra & $E_8$ Root Invariants**: 64-state geometric algebra, 15 bivectors, and $16 \times 16 = 256$ BFS transport.
-   - **Order-2 Dirichlet Byte-Markov & Cellular Automata (CA 184/30) Demarcation**: Natural stream chunking without relying on programming language syntax trees.
-   - **Online Shannon Surprisal Sketching & 90% Semantic Mass Sparsification**: Retains highest-salience semantic nodes per block, raising SNR by $\sqrt{48/16} \approx 1.73\times$ while reducing accumulator work.
-   - **Dynamic Lifecycle Routing & Counterfactual Placement**: Classifies code across 6 universal computational lifecycle archetypes (`#io`, `#state`, `#space`, `#op`, `#route`, `#gate`) and routes implementation tasks with automated counterfactual multi-concern splitting.
-   - **Scientific Experiment Ledger & Binary Slab Serialization**: Non-destructive state accumulation, exact algebraic undo, and Merkle root verification.
+1. **Hybrid Code Search (`router-search`)**:
+   - **Fuzzy File Matching**: Fast path matching with word boundary and case detection (similar to FZF).
+   - **Full-Text BM25 Ranking**: Keyword content search with proximity scoring and typo tolerance.
+   - **Code Symbol Detection**: Extracts function definitions, classes, and types across C/C++, Rust, Python, Go, TypeScript, Lua, and Lean.
+   - **C API (`search_engine.h`)**: Ready for direct embedding into Neovim (via LuaJIT `ffi`), Python (`ctypes`), or Rust (`bindgen`).
 
-2. **`router-search` (`search_engine`) — Hybrid Repository Search**:
-   - **Smith-Waterman / FZF Affine-Gap Fuzzy Path Matcher**: Word boundary, snake_case/camelCase hump detection, and basename multipliers.
-   - **Okapi BM25 Content Scoring**: Corpus inverse document frequency (IDF) weighting, 5-line sliding window multi-term proximity, and typo tolerance.
-   - **Structural Symbol Extraction**: Detects definitions and signatures across C/C++, Rust, Lua, Python, Go, TypeScript/JavaScript, and Lean.
-   - **C ABI (`search_engine.h`)**: Ready for direct FFI embedding into Neovim (via LuaJIT `ffi`), Python (`ctypes`), or Rust (`bindgen`).
+2. **Data Routing & Classification (`manifold`)**:
+   - Zero-dependency byte stream chunking and high-dimensional vector routing.
+   - Classifies code and tasks into lifecycle categories (`#io`, `#state`, `#space`, `#op`, `#route`, `#gate`).
+   - Compact binary serialization and state history.
 
 ---
 
