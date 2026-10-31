@@ -30,10 +30,18 @@ const char* synvim_search_repo(
     int max_results
 );
 
+const char* router_search_repo(
+    const char* root_dir,
+    const char* query_raw,
+    const char* locations_json,
+    int max_results
+);
+
 /**
  * Returns search engine version string.
  */
 const char* synvim_search_version(void);
+const char* router_search_version(void);
 
 #ifdef __cplusplus
 }

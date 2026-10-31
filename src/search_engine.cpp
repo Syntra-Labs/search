@@ -1435,3 +1435,16 @@ extern "C" const char* synvim_search_repo(
 extern "C" const char* synvim_search_version(void) {
     return "0.2.0-hybrid-bm25-fzf-c++20";
 }
+
+extern "C" const char* router_search_repo(
+    const char* root_dir_raw,
+    const char* query_raw_cstr,
+    const char* locations_json_raw,
+    int max_results
+) {
+    return synvim_search_repo(root_dir_raw, query_raw_cstr, locations_json_raw, max_results);
+}
+
+extern "C" const char* router_search_version(void) {
+    return synvim_search_version();
+}

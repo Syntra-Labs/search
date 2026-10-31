@@ -117,28 +117,62 @@ ctest --test-dir build --output-on-failure
 
 ---
 
-## 5. `router-search` CLI & C API Usage
+## 5. `router-search` CLI & Neovim `:Find` Plugin
 
-### Command Line
+### Command Line Tool
+`router-search` is a fast CLI tool for code, symbol, and file searching with colorized output, file-only mode, and JSON export:
+
 ```bash
-# Search for files or symbols
-./bin/router-search "manifold" . 10
+# Search current directory for a symbol or keyword
+router-search "handle_connection"
+
+# Search a specific repository path
+router-search -d /path/to/repo "StateEngine"
+
+# Print only matching file paths (useful for xargs, fzf, or scripts)
+router-search -l "matrix_multiply"
+
+# Output raw JSON for programmatic tools
+router-search --json "solve_puzzle"
+
+# Limit maximum results (default 30)
+router-search -n 10 "tokenizer"
 ```
 
-### Neovim LuaJIT Integration
+### Neovim Plugin Integration (`:Find`)
+
+`router` is also a full Neovim plugin providing interactive hybrid search (`FZF + BM25 + AST`):
+
+#### Installation
+Using `lazy.nvim`:
 ```lua
-local ffi = require("ffi")
-ffi.cdef[[
-  const char* synvim_search_repo(const char* root_dir, const char* query_raw, const char* locations_json, int max_results);
-  const char* synvim_search_version(void);
-]]
-
-local search_lib = ffi.load("librouter_search.so")
-local json_results = ffi.string(search_lib.synvim_search_repo(".", "ManifoldEngine", nil, 20))
+{
+    "Syntra-Labs/router",
+    opts = {
+        keymap = "<leader>f", -- or false to disable default mapping
+    },
+}
 ```
+
+Or using `vim-plug`:
+```vim
+Plug 'Syntra-Labs/router'
+```
+
+#### Commands & Usage
+- `:Find` opens the interactive floating search bar.
+- Press `<leader>f` to trigger `:Find`.
+- Type search queries with live preview:
+  - Scopes: `@algo <query>`, `@docs <query>`, `@deps <query>`, `@code <query>`
+  - Scoped directories: `:Find parse_json in src/ parser/`
+- Navigation:
+  - `<CR>`: Jump to match and close.
+  - `<Tab>` or `p`: Live preview match in the editor split.
+  - `<Down>` / `<Up>` / `<C-n>` / `<C-p>`: Select next/previous result.
+  - `<Esc>` or `q`: Close search window.
 
 ---
 
 ## 6. License & Attribution
 
-Part of the **Syntra Labs** systems architecture. Designed for pairing with `synvim`, `r4-prover`, and sovereign developer environments.
+Part of the **Syntra Labs** systems architecture. Designed for pairing with `synvim`, `taskflow`, `scribe`, and modern terminal workflows.
