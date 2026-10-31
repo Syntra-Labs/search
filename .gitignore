@@ -1,0 +1,23 @@
+# Build outputs
+build/
+bin/
+lib/
+*.o
+*.so
+*.a
+*.dylib
+*.dll
+*.exe
+
+# Manifold databases & checkpoints
+*.mfd
+*.mfd.tmp
+*.checkpoint
+
+# Editors & IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
