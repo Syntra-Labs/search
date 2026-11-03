@@ -1,6 +1,6 @@
 # router
 
-> **Fast C++20 Code Search Engine & Data Classification Core**  
+> **Fast C++20 Code Search Engine & Reference Placement Core**  
 > Pure C++20 with zero third-party dependencies.
 
 ---
@@ -15,10 +15,11 @@
    - **Code Symbol Detection**: Extracts function definitions, classes, and types across C/C++, Rust, Python, Go, TypeScript, Lua, and Lean.
    - **C API (`search_engine.h`)**: Ready for direct embedding into Neovim (via LuaJIT `ffi`), Python (`ctypes`), or Rust (`bindgen`).
 
-2. **Data Routing & Classification (`manifold`)**:
-   - Zero-dependency byte stream chunking and high-dimensional vector routing.
-   - Classifies code and tasks into lifecycle categories (`#io`, `#state`, `#space`, `#op`, `#route`, `#gate`).
-   - Compact binary serialization and state history.
+2. **Reference Placement & Gap Verification Engine (`manifold`)**:
+   - Pure C++20 zero-dependency reference placement, discovery, and code-gap filling engine.
+   - Multilingual gap detection (C++, Python, Rust, Lua, JavaScript) targeting stubs, empty functions, and `TODO` comments.
+   - Verified gap lifecycle state machine (`CANDIDATE` &rarr; `PROPOSED` &rarr; `ADAPTED` &rarr; `VERIFIED` / `REJECTED`) with transition proof gating.
+   - 8192-bit binary hypervector indexing, byte-entropy analysis, and compact binary checkpoints.
 
 ---
 
@@ -76,43 +77,50 @@ ctest --test-dir build --output-on-failure
 
 ### Self-Test & Benchmarks
 ```bash
-# Run the complete 7-suite Phase 4 empirical verification suite
+# Run the complete test and verification suite
 ./bin/manifold selftest
 
 # Benchmark ingestion speed on a codebase
-./bin/manifold benchmark /path/to/repo
+./bin/manifold benchmark [dir_path]
 ```
 
-### Initializing & Teaching Archetypes
+### Reference Discovery & Indexing
 ```bash
-# Initialize a new manifold database
-./bin/manifold init index.mfd
+# List built-in reference catalog sources
+./bin/manifold catalog --list
 
-# Teach archetype exemplars into the attractor field
-./bin/manifold teach index.mfd #op "template <typename T> void matrix_multiply(const T* a, const T* b, T* c)"
-./bin/manifold teach index.mfd #gate "assert(bounds_check(idx) && \"Index out of range\");"
+# Scan a repository to discover recommended reference sources
+./bin/manifold discover /path/to/repo
+
+# Index reference sources into the repository manifold database
+./bin/manifold index <repo_or_db> --sources <id1,id2,...>
 ```
 
-### Multi-Scope Ingestion
+### Code Gap Detection & Placement
 ```bash
-# Ingest local repository files
-./bin/manifold ingest index.mfd --scope repo src/
+# Scan repository for code gaps (stubs, empty bodies, TODOs across C++, Python, Rust, Lua, JS)
+./bin/manifold gaps <repo_or_db>
 
-# Ingest wget / HTML reference documentation
-./bin/manifold ingest index.mfd --scope web /path/to/wget_mirror/
+# Find candidate reference placements to fill a specific gap
+./bin/manifold fill <repo_or_db> --gap <id> [--space <paths>]
+
+# Place a query or code onto local targets (FILL, MOVE, EXTRACT)
+./bin/manifold place "<query>" [--space <paths>] [--kinds <fill,move,extract>] [--json]
+
+# Search indexed reference space
+./bin/manifold search "<query>" [--space <paths>]
 ```
 
-### Scoped Geometric Query Routing
+### Gap State Machine & Verification Transitions
 ```bash
-# Query across scopes and archetypes
-./bin/manifold query index.mfd "@repo #op Fourier transform"
-./bin/manifold query index.mfd "@web #space Riemann zeta prime Hopf"
-```
+# Transition lifecycle: CANDIDATE -> PROPOSED -> ADAPTED -> VERIFIED / REJECTED
+./bin/manifold select <repo_or_db> --gap <id> --reference <idx_or_cell_id>
+./bin/manifold apply <repo_or_db> --gap <id> --code "<adapted_code>"
+./bin/manifold verify <repo_or_db> --gap <id> --result "<verification_result>"
+./bin/manifold reject <repo_or_db> --gap <id> --reason "<reason>"
 
-### Task Placement & Falsification Hazards
-```bash
-# Place an implementation task specification onto the optimal file / code block
-./bin/manifold place index.mfd "Implement 4th-order Taylor curvature expansion for holonomic parallel transport"
+# Inspect current gap lifecycle status
+./bin/manifold status <repo_or_db> [--gap <id>]
 ```
 
 ---
