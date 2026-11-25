@@ -2,6 +2,7 @@
 build/
 bin/
 lib/
+.lake/
 *.o
 *.so
 *.a
